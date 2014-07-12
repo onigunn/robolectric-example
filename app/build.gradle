@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.robolectric:robolectric-gradle-plugin:0.11.+'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'robolectric'
+
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "net.schoengeist.android.robolectric"
+        minSdkVersion 15
+        targetSdkVersion 18
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        androidTest {
+            setRoot('src/test')
+        }
+    }
+}
+
+robolectric {
+    include '**/*Test.class'
+    maxHeapSize = "2048m"
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    androidTestCompile 'junit:junit:4.10'
+    androidTestCompile 'org.robolectric:robolectric:2.3+'
+    androidTestCompile 'com.squareup:fest-android:1.0.+'
+}
