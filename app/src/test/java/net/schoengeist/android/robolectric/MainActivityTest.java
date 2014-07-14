@@ -3,6 +3,8 @@ package net.schoengeist.android.robolectric;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,8 +16,10 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
 
 import static org.fest.assertions.api.ANDROID.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.robolectric.Robolectric.shadowOf;
 
@@ -49,28 +53,44 @@ public class MainActivityTest {
     }
 
     @Test
-    public void shouldHaveThreeButtons() throws Exception {
-        LinearLayout layout = (LinearLayout) sut.findViewById(R.id.linearLayout);
-        assertThat(layout)
-                .hasChildCount(3)
-                .isVisible();
+    public void shouldHaveButton() throws Exception {
+        Button button = (Button) sut.findViewById(R.id.button1);
+        assertThat(button).isVisible();
     }
 
     @Test
-    public void shouldHideButton2OnButton1Click() throws Exception {
+    public void shouldHaveButtonInLayout() throws Exception {
+        LinearLayout layout = (LinearLayout) sut.findViewById(R.id.linearLayout);
+        assertThat(layout).hasChildCount(2);
+    }
+
+    @Test
+    public void shouldStartNexActivity() throws Exception {
         sut.findViewById(R.id.button1).performClick();
 
-        View button2 = sut.findViewById(R.id.button2);
-        assertThat(button2).isInvisible();
+        ShadowActivity shadowActivity = shadowOf(sut);
+        Intent nextStartedActivity = shadowActivity.getNextStartedActivity();
+
+        Intent expected = new Intent(sut, NextActivitiy.class);
+        assertThat(nextStartedActivity).isEqualTo(expected);
     }
 
     @Test
-    public void shouldStartIntent() throws Exception {
-        Intent expectedIntent = new Intent(sut, MainActivity.class);
+    public void shouldHaveLauncherIcon() throws Exception {
+        ImageView imageView = (ImageView) sut.findViewById(R.id.imageView);
+        int imageResourceId = shadowOf(imageView).getImageResourceId();
 
-        sut.findViewById(R.id.button2).performClick();
-        Intent startedActivity = shadowOf(sut).getNextStartedActivity();
+        assertEquals(imageResourceId, R.drawable.ic_launcher);
 
-        assertThat(startedActivity).isEqualTo(expectedIntent);
     }
+
+
+    // TEST LANDSCAPE LAYOUT
+    @Test
+    @Config(qualifiers = "land")
+    public void shouldTestLandscapeLayout() throws Exception {
+        LinearLayout layout = (LinearLayout) sut.findViewById(R.id.linearLayout);
+        assertThat(layout).hasChildCount(3);
+    }
+
 }

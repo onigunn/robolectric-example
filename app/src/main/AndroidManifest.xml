@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.schoengeist.android.robolectric" >
 
-    <uses-sdk android:minSdkVersion="18"
-        android:targetSdkVersion="18"/>
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -18,6 +19,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".NextActivitiy"
+            android:label="@string/title_activity_next_activitiy" >
         </activity>
     </application>
 
