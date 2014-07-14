@@ -1,34 +1,24 @@
 package net.schoengeist.android.robolectric;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import net.schoengeist.android.robolectric.R;
 
-
-public class MainActivity extends Activity {
+public class NextActivitiy extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NextActivitiy.class);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_next_activitiy);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.next_activitiy, menu);
         return true;
     }
 
