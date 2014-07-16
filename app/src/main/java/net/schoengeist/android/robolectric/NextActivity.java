@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import net.schoengeist.android.robolectric.R;
 
-public class NextActivitiy extends Activity {
+public class NextActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

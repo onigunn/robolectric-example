@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NextActivitiy.class);
+                Intent intent = new Intent(MainActivity.this, NextActivity.class);
                 startActivity(intent);
             }
         });
