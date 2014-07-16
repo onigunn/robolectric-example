@@ -71,7 +71,7 @@ public class MainActivityTest {
         ShadowActivity shadowActivity = shadowOf(sut);
         Intent nextStartedActivity = shadowActivity.getNextStartedActivity();
 
-        Intent expected = new Intent(sut, NextActivitiy.class);
+        Intent expected = new Intent(sut, NextActivity.class);
         assertThat(nextStartedActivity).isEqualTo(expected);
     }
 

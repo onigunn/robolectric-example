@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NextActivitiy"
+            android:name=".NextActivity"
             android:label="@string/title_activity_next_activitiy" >
         </activity>
     </application>
